@@ -41,9 +41,8 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--cream);padding:8px 18px;border-radius:999px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--burg-70);margin-bottom:32px}
 .hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--burg);animation:pulse 2.5s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(1.5)}}
-.hero h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(44px,6vw,76px);line-height:.95;margin:0 0 28px;letter-spacing:-.03em}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(38px,5.2vw,68px);line-height:1.0;margin:0 0 28px;letter-spacing:-.03em}
 .hero h1 em{font-style:italic;font-weight:500;color:var(--burg-50)}
-.hero h1 mark{background:var(--cream);padding:0 12px;border-radius:10px;display:inline-block;transform:rotate(-1deg)}
 .hero-lead{font-size:17px;line-height:1.7;color:var(--burg-50);max-width:480px;margin:0 0 36px}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 .btn-dark{background:var(--burg);color:var(--cream-light);padding:16px 36px;border-radius:999px;font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:10px;transition:transform .15s,box-shadow .2s}
@@ -135,6 +134,12 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .live-banner-btn{background:var(--cream);color:var(--burg);padding:14px 32px;border-radius:999px;font-size:14px;font-weight:600;flex-shrink:0;transition:transform .15s}
 .live-banner-btn:hover{transform:translateY(-1px)}
 
+/* CASE CTA */
+.case-cta{display:flex;align-items:center;justify-content:space-between;background:var(--cream);border-radius:var(--r);padding:36px 40px;margin-top:20px;gap:20px;border:1px solid rgba(67,48,46,.07)}
+.case-cta p{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;margin:0;line-height:1.1}
+.case-cta-btn{background:var(--burg);color:var(--cream-light);padding:14px 32px;border-radius:999px;font-size:14px;font-weight:600;flex-shrink:0;transition:transform .15s,box-shadow .2s;white-space:nowrap}
+.case-cta-btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(67,48,46,.22)}
+
 /* PROCESS */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
 .step{background:var(--white);border:1px solid rgba(67,48,46,.05);border-radius:var(--r);padding:36px 28px;text-align:center;transition:transform .2s,box-shadow .2s}
@@ -153,8 +158,10 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .s-card:nth-child(1) .s-icon{background:var(--blue-soft)}
 .s-card:nth-child(2) .s-icon{background:var(--white)}
 .s-card:nth-child(3) .s-icon{background:var(--cream)}
-.s-card h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;margin:0 0 12px;line-height:1.12}
-.s-card>p{font-size:15px;color:var(--burg-50);line-height:1.6;margin:0 0 20px;flex:1}
+.s-card h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;margin:0 0 8px;line-height:1.12}
+.s-for{font-size:13.5px;color:var(--burg-50);line-height:1.5;margin:0 0 14px;font-style:italic;padding-bottom:14px;border-bottom:1px solid rgba(67,48,46,.06)}
+.s-card.accent .s-for{border-color:rgba(67,48,46,.09)}
+.s-card>p.s-desc{font-size:15px;color:var(--burg-50);line-height:1.6;margin:0 0 20px;flex:1}
 .s-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;padding-top:18px;border-top:1px solid rgba(67,48,46,.06)}
 .s-card.accent .s-list{border-color:rgba(67,48,46,.09)}
 .s-list li{font-size:13.5px;color:var(--burg-70);display:flex;gap:8px;align-items:flex-start;line-height:1.45}
@@ -185,6 +192,18 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .p-card.dark .p-btn:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(0,0,0,.15)}
 .pricing-note{margin-top:28px;font-size:15px;color:var(--burg-50);max-width:560px;line-height:1.65;font-style:italic}
 
+/* FAQ */
+.faq{display:flex;flex-direction:column;gap:0;margin-top:48px;max-width:800px}
+.faq-item{border-bottom:1px solid rgba(67,48,46,.07);overflow:hidden}
+.faq-item:first-child{border-top:1px solid rgba(67,48,46,.07)}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:24px 0;cursor:pointer;gap:20px;user-select:none}
+.faq-q-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;line-height:1.2;color:var(--burg)}
+.faq-icon{width:36px;height:36px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;font-weight:300;color:var(--burg);transition:transform .3s,background .2s}
+.faq-item.open .faq-icon{transform:rotate(45deg);background:var(--burg);color:var(--cream-light)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
+.faq-a-inner{padding:0 0 24px;font-size:16px;color:var(--burg-50);line-height:1.75;max-width:660px}
+.faq-item.open .faq-a{max-height:300px}
+
 /* CTA */
 .cta-sec{padding:40px 0 100px}
 .cta-box{background:var(--burg);border-radius:36px;padding:80px 56px;text-align:center;color:var(--cream-light);position:relative;overflow:hidden}
@@ -192,7 +211,8 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .cta-box::after{content:"";position:absolute;bottom:-80px;left:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(255,241,181,.1) 0%,transparent 65%);border-radius:50%;pointer-events:none}
 .cta-box h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,62px);font-weight:700;margin:0 0 20px;line-height:1.05;position:relative;z-index:2;letter-spacing:-.02em}
 .cta-box h2 em{font-style:italic;font-weight:500;color:var(--cream)}
-.cta-box p{font-size:17px;color:rgba(255,241,181,.75);max-width:480px;margin:0 auto 36px;line-height:1.6;position:relative;z-index:2}
+.cta-box p{font-size:17px;color:rgba(255,241,181,.75);max-width:480px;margin:0 auto 12px;line-height:1.6;position:relative;z-index:2}
+.cta-note{font-size:13.5px;color:rgba(255,241,181,.45);max-width:400px;margin:0 auto 36px!important;font-style:italic}
 .cta-btn{display:inline-flex;align-items:center;gap:12px;background:var(--cream);color:var(--burg);padding:18px 44px;border-radius:999px;font-size:15px;font-weight:600;transition:transform .15s,box-shadow .2s;position:relative;z-index:2;box-shadow:0 10px 28px rgba(0,0,0,.1)}
 .cta-btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.16)}
 .cta-btn .arr{transition:transform .2s}.cta-btn:hover .arr{transform:translateX(4px)}
@@ -224,6 +244,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   .footer-inner{flex-direction:column;gap:16px;text-align:center}
   .show-full-caption{flex-direction:column;text-align:left}.show-full-caption p{text-align:left}
   .live-banner{flex-direction:column;text-align:center}
+  .case-cta{flex-direction:column;text-align:center}
   .about-collage{max-width:400px}
 }
 @media(max-width:540px){.services-grid,.steps{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
@@ -240,6 +261,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
       <a href="#case">Кейс</a>
       <a href="#services">Услуги</a>
       <a href="#pricing">Цены</a>
+      <a href="#faq">Вопросы</a>
     </nav>
     <a href="#contact" class="header-btn">Обсудить проект</a>
   </div>
@@ -251,8 +273,8 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     <div class="hero-grid fi">
       <div>
         <div class="hero-tag"><span class="dot"></span> Веб-дизайнер · Москва</div>
-        <h1>Создаю сайты,<br>в которые <em>хочется</em><br><mark>влюбиться</mark></h1>
-        <p class="hero-lead">Не просто красивая страница — а&nbsp;рабочий инструмент с&nbsp;календарём, оплатой, формами и&nbsp;расписанием. Который вы сами сможете вести и&nbsp;обновлять.</p>
+        <h1>Превращаю идеи в сайты, которые продают — <em>даже когда вы не онлайн</em></h1>
+        <p class="hero-lead">Веб-дизайн для малого бизнеса и личных брендов — от концепции до запуска, с адаптивом, анимациями и всем, что нужно для продаж.</p>
         <div class="hero-btns">
           <a href="#contact" class="btn-dark">Обсудить проект <span class="arr">→</span></a>
           <a href="#case" class="btn-line">Смотреть кейс</a>
@@ -286,7 +308,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   <div class="wrap">
     <div class="fi">
       <span class="sec-label">обо мне</span>
-      <h2 class="sec-title">Я — Ева. Делаю сайты,<br>которые хочется рассматривать</em></h2>
+      <h2 class="sec-title">Я — Ева. Делаю сайты,<br>которые хочется <em>рассматривать</em></h2>
     </div>
     <div class="about-grid">
       <div class="about-collage fi fi-d1">
@@ -295,9 +317,10 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         <div class="about-collage-img"><img src="eva-about-3.jpeg" alt="Ева"/></div>
       </div>
       <div class="about-text fi fi-d2">
-        <p>У вас 3 секунды, когда человек заходит на сайт. За это время он решает — остаться или&nbsp;уйти. Я&nbsp;делаю так, чтобы <strong>оставался</strong>.</p>
-        <p>Нахожу визуальный язык для вашего проекта: цвета, ритм, типографику</strong>.</p>
-        <p>Но главное — сайт не просто красиво выглядит. Он&nbsp;работает: принимает заявки, считает места, подключает оплату. Вы&nbsp;обновляете расписание сами, а&nbsp;сайт делает&nbsp;остальное.</p>
+        <p>7 лет в дизайне — начинала с упаковки и PDF-документов для друзей и семейного бизнеса, пока не поняла, что веб-дизайн — это то самое пересечение <strong>творчества, аналитики и реальной пользы</strong>, которое мне нужно.</p>
+        <p>Для меня каждый проект — возможность создать что-то новое. Я люблю продумывать систему целиком: от визуального языка до логики, по которой двигается пользователь. Красота и функциональность для меня неотделимы.</p>
+        <p>В работе мне важно быть на одной волне с клиентом — вдохновляться идеями друг от друга, объяснять логику решений и двигаться <strong>честно и смело</strong>. Берусь только за проекты, которые мне самой важны и интересны.</p>
+        <p>Вне работы я выражаю себя через танцы, стиль и видео — и это постоянно питает мой творческий процесс.</p>
         <div class="about-pills">
           <span>Веб-дизайн</span><span>Вёрстка</span><span>Адаптив</span><span>Figma</span><span>Vercel</span>
         </div>
@@ -313,7 +336,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   <div class="wrap">
     <div class="fi"><div class="case-tag">☀ Кейс</div></div>
     <div class="case-header fi">
-      <div><h2 class="sec-title">Клуб "Рассвет" — создание сайта <em>с системой и функционалом за 7 дней</em><br></h2></div>
+      <div><h2 class="sec-title">Клуб "Рассвет" — создание сайта <em>с системой и функционалом за 7 дней</em></h2></div>
       <p class="sec-sub">Женский клуб активностей в&nbsp;Москве. Задача — сделать сайт, который не просто расскажет о&nbsp;клубе, а&nbsp;сам начнёт принимать оплату и&nbsp;вести запись.</p>
     </div>
 
@@ -325,8 +348,6 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     </div>
 
     <div class="showcase">
-
-      <!-- 1. Hero -->
       <div class="show-item fi">
         <div class="show-img"><img src="case-hero.png" alt="Hero-секция"/></div>
         <div class="show-text">
@@ -336,7 +357,6 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         </div>
       </div>
 
-      <!-- 2. About -->
       <div class="show-item reverse fi">
         <div class="show-img"><img src="case-about.png" alt="О клубе"/></div>
         <div class="show-text">
@@ -346,7 +366,6 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         </div>
       </div>
 
-      <!-- 3. Schedule -->
       <div class="fi">
         <div class="show-full"><img src="case-schedule.png" alt="Расписание на неделю"/></div>
         <div class="show-full-caption">
@@ -355,7 +374,6 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         </div>
       </div>
 
-      <!-- 4. Calendar header -->
       <div class="show-item fi">
         <div class="show-img"><img src="case-calendar-header.png" alt="Календарь"/></div>
         <div class="show-text">
@@ -365,7 +383,6 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         </div>
       </div>
 
-      <!-- 5. Calendar grid -->
       <div class="fi">
         <div class="show-full"><img src="case-calendar-full.png" alt="Сетка календаря"/></div>
         <div class="show-full-caption">
@@ -374,7 +391,6 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         </div>
       </div>
 
-      <!-- 6. Gallery -->
       <div class="show-item reverse fi">
         <div class="show-img"><img src="case-gallery.png" alt="Галерея"/></div>
         <div class="show-text">
@@ -384,7 +400,6 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         </div>
       </div>
 
-      <!-- 7. Pricing -->
       <div class="show-item fi">
         <div class="show-img"><img src="case-pricing.png" alt="Тарифы"/></div>
         <div class="show-text">
@@ -398,7 +413,7 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     <div class="case-cards fi">
       <div class="c-card light">
         <h4>Было</h4>
-        <p> Идея создать клуб в Telegram-чате. Запись через личные сообщения, расписание в&nbsp;заметках, оплата переводом и не понятна структура самопрезентации. Сложно&nbsp;масштабировать.</p>
+        <p>Идея создать клуб в Telegram-чате. Запись через личные сообщения, расписание в&nbsp;заметках, оплата переводом и не понятна структура самопрезентации. Сложно&nbsp;масштабировать.</p>
       </div>
       <div class="c-card dark">
         <h4>Стало</h4>
@@ -420,6 +435,13 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
       </div>
       <span class="live-banner-btn">Открыть →</span>
     </a>
+
+    <!-- CASE CTA -->
+    <div class="case-cta fi">
+      <p>Следующий проект — ваш?</p>
+      <a href="https://t.me/evavasilyyevna" target="_blank" rel="noopener" class="case-cta-btn">Написать в Telegram →</a>
+    </div>
+
   </div>
 </section>
 
@@ -431,10 +453,26 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
       <h2 class="sec-title">От идеи до <em>готового сайта</em></h2>
     </div>
     <div class="steps fi">
-      <div class="step"><div class="step-n">01</div><div class="step-name">Разбираемся</div><div class="step-desc">Созвон 30 мин. Понимаю ваш проект, аудиторию и задачу. Вы рассказываете — я слушаю.</div></div>
-      <div class="step"><div class="step-n">02</div><div class="step-name">Проектирую</div><div class="step-desc">Мудборд, палитра, структура. Показываю направление до начала работы — вы точно знаете, что получите.</div></div>
-      <div class="step"><div class="step-n">03</div><div class="step-name">Собираю</div><div class="step-desc">Дизайн, вёрстка, адаптив, анимации. Показываю промежуточный результат — правки на ходу.</div></div>
-      <div class="step"><div class="step-n">04</div><div class="step-name">Запускаю</div><div class="step-desc">Деплой, тестирование, передача. Ваш сайт в интернете — готовый и работающий.</div></div>
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-name">Разбираемся</div>
+        <div class="step-desc">Вы пишете — я присылаю бриф-анкету и предлагаю время для созвона на 30 минут. Понимаю ваш проект, аудиторию и задачу.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-name">Проектирую</div>
+        <div class="step-desc">Мудборд, палитра, структура. Показываю направление до начала работы — вы точно знаете, что получите.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-name">Собираю</div>
+        <div class="step-desc">Дизайн, вёрстка, адаптив, анимации. Показываю промежуточный результат — правки на ходу.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <div class="step-name">Запускаю</div>
+        <div class="step-desc">Деплой, тестирование, передача. Ваш сайт в интернете — готовый и работающий.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -446,25 +484,48 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   <div class="wrap">
     <div class="fi"><span class="sec-label">услуги</span><h2 class="sec-title">Что я могу создать <em>для вас</em></h2></div>
     <div class="services-grid fi">
+
       <div class="s-card">
         <div class="s-icon">✦</div>
         <h3>Лендинг</h3>
-        <p>Одностраничник, который передаёт настроение и&nbsp;ведёт к&nbsp;действию. Для тех, кому нужен красивый старт.</p>
-        <ul class="s-list"><li>Дизайн-концепция</li><li>Адаптивная вёрстка</li><li>Анимации при скролле</li><li>Деплой на Vercel</li></ul>
+        <p class="s-for">Подойдёт, если вы только начинаете или хотите красивую точку входа — без сложного функционала. Главное — передать настроение и привести к одному действию.</p>
+        <p class="s-desc">Одностраничник, который передаёт настроение и&nbsp;ведёт к&nbsp;действию.</p>
+        <ul class="s-list">
+          <li>Дизайн-концепция</li>
+          <li>Адаптивная вёрстка</li>
+          <li>Анимации при скролле</li>
+          <li>Деплой на Vercel</li>
+        </ul>
       </div>
+
       <div class="s-card accent">
         <span class="s-badge">Популярное</span>
         <div class="s-icon">☀</div>
         <h3>Лендинг + система</h3>
-        <p>Сайт с оплатой, расписанием, формами и интеграциями. Вы получаете инструмент, а&nbsp;не просто страницу.</p>
-        <ul class="s-list"><li>Всё из «Лендинг»</li><li>Формы записи и модальные окна</li><li>Интеграция с оплатой</li><li>Google Sheets / Notion</li><li>Счётчик мест</li></ul>
+        <p class="s-for">Подойдёт, если у вас есть расписание, несколько услуг или нужна онлайн-оплата. Хотите, чтобы сайт работал сам — принимал заявки и не требовал вашего участия в рутине.</p>
+        <p class="s-desc">Сайт с оплатой, расписанием, формами и интеграциями. Вы получаете инструмент, а&nbsp;не просто страницу.</p>
+        <ul class="s-list">
+          <li>Всё из «Лендинг»</li>
+          <li>Формы записи и модальные окна</li>
+          <li>Интеграция с оплатой</li>
+          <li>Google Sheets / Notion</li>
+          <li>Счётчик мест</li>
+        </ul>
       </div>
+
       <div class="s-card">
         <div class="s-icon">✎</div>
         <h3>Редизайн</h3>
-        <p>У вас есть сайт, но он не работает на вас. Новый визуал, чистая структура, свежая эстетика.</p>
-        <ul class="s-list"><li>Аудит текущего сайта</li><li>Новая визуальная концепция</li><li>Обновлённая вёрстка</li><li>Улучшение UX</li></ul>
+        <p class="s-for">Подойдёт, если сайт уже есть, но вы стесняетесь его показывать или он просто не приносит клиентов. Обновим визуал, структуру и логику.</p>
+        <p class="s-desc">У вас есть сайт, но он не работает на вас. Новый визуал, чистая структура, свежая эстетика.</p>
+        <ul class="s-list">
+          <li>Аудит текущего сайта</li>
+          <li>Новая визуальная концепция</li>
+          <li>Обновлённая вёрстка</li>
+          <li>Улучшение UX</li>
+        </ul>
       </div>
+
     </div>
   </div>
 </section>
@@ -481,7 +542,12 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         <div class="p-desc">Одностраничник, который передаёт настроение и продаёт</div>
         <div class="p-price"><span class="from">от</span>35 000<span class="cur">₽</span></div>
         <div class="p-note">срок — от 5 дней</div>
-        <ul class="p-features"><li>Дизайн-концепция и мудборд</li><li>Адаптив под мобильные</li><li>Анимации при скролле</li><li>Деплой + 1 правка</li></ul>
+        <ul class="p-features">
+          <li>Дизайн-концепция и мудборд</li>
+          <li>Адаптив под мобильные</li>
+          <li>Анимации при скролле</li>
+          <li>Деплой + 1 правка</li>
+        </ul>
         <a href="#contact" class="p-btn">Обсудить →</a>
       </div>
       <div class="p-card dark">
@@ -489,11 +555,83 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
         <div class="p-desc">Сайт с интеграциями, оплатой и функционалом</div>
         <div class="p-price"><span class="from">от</span>60 000<span class="cur">₽</span></div>
         <div class="p-note">срок — от 7 дней</div>
-        <ul class="p-features"><li>Всё из тарифа «Лендинг»</li><li>Формы + модальные окна</li><li>Интеграция с оплатой</li><li>Google Sheets / база данных</li><li>Дополнительные страницы</li><li>2 правки и сопровождение по вопросам в течение 2 недель</li></ul>
+        <ul class="p-features">
+          <li>Всё из тарифа «Лендинг»</li>
+          <li>Формы + модальные окна</li>
+          <li>Интеграция с оплатой</li>
+          <li>Google Sheets / база данных</li>
+          <li>Дополнительные страницы</li>
+          <li>2 правки и сопровождение в течение 2 недель</li>
+        </ul>
         <a href="#contact" class="p-btn">Обсудить →</a>
       </div>
     </div>
-    <p class="pricing-note fi">Точная стоимость — после короткого созвона. Зависит от объёма. Оплата: 70% до начала, 30% после сдачи.</p>
+    <p class="pricing-note fi">Точная стоимость — после короткого созвона. Зависит от объёма. Оплата: 70% до начала, 30% после сдачи. Домен, хостинг и эквайринг — отдельные расходы на вашей стороне, всё объясню заранее.</p>
+  </div>
+</section>
+
+<hr class="divider wrap">
+
+<!-- FAQ -->
+<section id="faq" class="sec">
+  <div class="wrap">
+    <div class="fi">
+      <span class="sec-label">вопросы и ответы</span>
+      <h2 class="sec-title">Отвечаю <em>заранее</em></h2>
+    </div>
+    <div class="faq fi">
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Сколько правок включено и что если понадобится больше?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">В пакете «Лендинг» — одна волна правок после сдачи. В «Лендинг + система» — две волны плюс сопровождение по вопросам в течение двух недель. Правка — это не «переделать всё», а конкретные комментарии за один заход. Если понадобится что-то сверх этого, обсудим отдельно — по фиксированной ставке, без сюрпризов.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Что нужно от меня для старта?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Немного: ваши мысли о проекте, примеры сайтов, которые нравятся, и фотографии (если есть). Всё остальное — тексты, структуру, визуальный язык — мы разбираем вместе на созвоне. Специально готовиться не нужно, достаточно рассказать о своём деле своими словами.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Вы работаете по договору?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Да. Перед стартом фиксируем объём, сроки и стоимость. Оплата поэтапная: 70% до начала работы, 30% после сдачи. Это защищает нас обоих и делает процесс предсказуемым.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Что происходит после сдачи — я смогу сам обновлять сайт?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Да, это одна из главных идей. Расписание, цены, описания — всё, что меняется часто, подтягивается из Google Таблицы. Обновили строчку — сайт обновился сам. Никаких обращений к разработчику для рутинных изменений.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">
+          <span class="faq-q-text">Из чего складывается итоговая стоимость?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">
+          <div class="faq-a-inner">Стоимость моей работы зафиксирована в тарифе. Отдельно от неё — небольшие технические расходы на вашей стороне: домен (около 1 000 ₽/год), хостинг на Vercel (бесплатно для большинства проектов) и эквайринг, если подключаем оплату (зависит от платёжного сервиса). Всё это я объясняю до старта, чтобы итоговая цифра не была неожиданностью.</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -502,7 +640,8 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
   <div class="wrap">
     <div class="cta-box fi">
       <h2>Пока вы думаете —<br><em>клиенты уходят на сайты, которые уже&nbsp;работают</em></h2>
-      <p>Напишите — обсудим вашу задачу за 15 минут</p>
+      <p>Напишите — обсудим ваш проект за 15 минут. Бесплатно, без обязательств.</p>
+      <p class="cta-note">Отвечаю в течение нескольких часов в будние дни.</p>
       <a href="https://t.me/evavasilyyevna" target="_blank" rel="noopener" class="cta-btn">✈ Написать в Telegram <span class="arr">→</span></a>
     </div>
   </div>
@@ -514,7 +653,11 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
     <div class="footer-inner">
       <a href="#" class="logo">eva.</a>
       <div class="footer-links">
-        <a href="#about">Обо мне</a><a href="#case">Кейс</a><a href="#services">Услуги</a><a href="#pricing">Цены</a>
+        <a href="#about">Обо мне</a>
+        <a href="#case">Кейс</a>
+        <a href="#services">Услуги</a>
+        <a href="#pricing">Цены</a>
+        <a href="#faq">Вопросы</a>
         <a href="https://t.me/evavasilyyevna" target="_blank" rel="noopener">Telegram</a>
       </div>
     </div>
@@ -523,10 +666,22 @@ body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;o
 </footer>
 
 <script>
+// Scroll animations
 const els=document.querySelectorAll('.fi');
 const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');obs.unobserve(x.target)}})},{threshold:.08});
 els.forEach(el=>obs.observe(el));
+
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(!t)return;e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-68,behavior:'smooth'})})});
+
+// FAQ accordion
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>{
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  });
+});
 </script>
 </body>
 </html>
