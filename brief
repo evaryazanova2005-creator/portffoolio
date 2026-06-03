@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бриф-анкета · Ева — веб-дизайн</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --warm-bg: #FAF6F1;
+    --cream: #F5EDE4;
+    --coral: #e5f2f5;
+    --coral-light: #4b7156;
+    --dark: #2C2C2C;
+    --dark-soft: #4A4A4A;
+    --text-muted: #8A8278;
+    --pink-soft: #F0D5CC;
+    --border: #E8DDD3;
+    --olive: #7A8B6F;
+  }
+
+  html { background: var(--warm-bg); }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--dark);
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 auto;
+    background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ═══════════ HEADER ═══════════ */
+  .header {
+    background: linear-gradient(165deg, var(--warm-bg) 0%, var(--cream) 50%, var(--pink-soft) 100%);
+    padding: 48px 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    right: -40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: var(--coral-light);
+    opacity: 0.1;
+  }
+
+  .header-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--coral);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--dark);
+    max-width: 520px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header h1 em {
+    color: var(--coral);
+    font-style: italic;
+  }
+
+  .header-intro {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--dark-soft);
+    max-width: 520px;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ═══════════ BODY ═══════════ */
+  .brief-body {
+    padding: 40px 48px 56px;
+  }
+
+  .brief-note {
+    background: var(--warm-bg);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    border-left: 3px solid var(--coral-light);
+  }
+
+  .brief-note strong {
+    color: var(--dark);
+  }
+
+  /* ═══════════ QUESTIONS ═══════════ */
+  .question-group {
+    margin-bottom: 36px;
+  }
+
+  .question-group-title {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--coral);
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .question {
+    margin-bottom: 28px;
+    page-break-inside: avoid;
+  }
+
+  .question-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: var(--coral);
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 10px;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  .question-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1.5;
+    margin-bottom: 6px;
+  }
+
+  .question-hint {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-left: 34px;
+    margin-bottom: 12px;
+  }
+
+  .question-answer {
+    margin-left: 34px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    min-height: 60px;
+    font-size: 14px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .question-answer.tall {
+    min-height: 100px;
+  }
+
+  .question-options {
+    margin-left: 34px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--dark-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .option-circle {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ═══════════ FOOTER ═══════════ */
+  .brief-footer {
+    background: var(--warm-bg);
+    padding: 32px 48px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .footer-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .footer-contact {
+    font-size: 13px;
+    color: var(--coral);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  @media print {
+    body { max-width: none; }
+    .question { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HEADER ═══════════ -->
+<div class="header">
+  <div class="header-label">Бриф-анкета</div>
+  <h1>Расскажите о вашем проекте — <em>я помогу превратить его в сайт</em></h1>
+  <p class="header-intro">Заполните анкету, чтобы я заранее поняла вашу задачу. Это займёт 5–7 минут и сэкономит нам время на созвоне. Не нужно готовиться специально — просто расскажите о своём деле своими словами.</p>
+</div>
+
+<!-- ═══════════ BODY ═══════════ -->
+<div class="brief-body">
+
+  <div class="brief-note">
+    <strong>Как это работает:</strong> вы заполняете анкету → я изучаю ответы → мы созваниваемся на 15–30 минут, чтобы обсудить детали и определить точную стоимость. Созвон бесплатный и ни к чему не обязывает.
+  </div>
+
+  <!-- ═══ БЛОК 1: О БИЗНЕСЕ ═══ -->
+  <div class="question-group">
+    <div class="question-group-title">О вашем бизнесе</div>
+
+    <div class="question">
+      <div class="question-text"><span class="question-number">1</span>Как называется ваш проект и чем вы занимаетесь?</div>
+      <div class="question-hint">Коротко опишите суть: что продаёте, какие услуги оказываете, кто ваши клиенты.</div>
+      <div class="question-answer tall">Ваш ответ...</div>
+    </div>
+
+    <div class="question">
+      <div class="question-text"><span class="question-number">2</span>Как вы сейчас принимаете заказы, запись или оплату?</div>
+      <div class="question-hint">Например: через Telegram-личку, Instagram-директ, по звонку, через Google-форму, переводом на карту и т.д.</div>
+      <div class="question-answer">Ваш ответ...</div>
+    </div>
+
+    <div class="question">
+      <div class="question-text"><span class="question-number">3</span>Что сейчас «болит» — с чем вы хотите разобраться в первую очередь?</div>
+      <div class="question-hint">Может быть что угодно: «устала отвечать одно и то же в директе», «стыдно показывать свой текущий сайт», «нет понятного расписания для клиентов», «хочу принимать оплату онлайн».</div>
+      <div class="question-answer tall">Ваш ответ...</div>
+    </div>
+  </div>
+
+  <!-- ═══ БЛОК 2: О САЙТЕ ═══ -->
+  <div class="question-group">
+    <div class="question-group-title">О будущем сайте</div>
+
+    <div class="question">
+      <div class="question-text"><span class="question-number">4</span>Какой тип проекта вам нужен?</div>
+      <div class="question-options">
+        <div class="option"><div class="option-circle"></div>Сайт с нуля — ничего пока нет</div>
+        <div class="option"><div class="option-circle"></div>Редизайн — сайт есть, но не устраивает</div>
+        <div class="option"><div class="option-circle"></div>Не уверен/а — хочу обсудить на созвоне</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-text"><span class="question-number">5</span>Какую главную задачу должен решать сайт?</div>
+      <div class="question-hint">Выберите одно или несколько.</div>
+      <div class="question-options">
+        <div class="option"><div class="option-circle"></div>Красивая визитка — рассказать о себе</div>
+        <div class="option"><div class="option-circle"></div>Собирать заявки и контакты</div>
+        <div class="option"><div class="option-circle"></div>Принимать оплату онлайн</div>
+        <div class="option"><div class="option-circle"></div>Показывать расписание / запись</div>
+        <div class="option"><div class="option-circle"></div>Заменить ручную работу автоматикой</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-text"><span class="question-number">6</span>Есть ли примеры сайтов, которые вам нравятся?</div>
+      <div class="question-hint">Скиньте 1–3 ссылки на сайты, которые вам визуально близки. Это поможет мне быстрее поймать нужное настроение. Если ничего нет — ничего страшного, разберёмся вместе.</div>
+      <div class="question-answer">Ваш ответ...</div>
+    </div>
+  </div>
+
+  <!-- ═══ БЛОК 3: РЕСУРСЫ ═══ -->
+  <div class="question-group">
+    <div class="question-group-title">Готовность и ресурсы</div>
+
+    <div class="question">
+      <div class="question-text"><span class="question-number">7</span>Есть ли у вас готовые материалы?</div>
+      <div class="question-hint">Тексты, профессиональные фото, логотип, фирменный стиль, брендбук. Если нет — это нормально, я помогу сформировать всё на этапе проектирования.</div>
+      <div class="question-answer">Ваш ответ...</div>
+    </div>
+
+    <div class="question">
+      <div class="question-text"><span class="question-number">8</span>Какой у вас примерный бюджет на сайт?</div>
+      <div class="question-hint">Это поможет мне подобрать оптимальный формат. Точная стоимость — после созвона.</div>
+      <div class="question-options">
+        <div class="option"><div class="option-circle"></div>до 50 000 ₽</div>
+        <div class="option"><div class="option-circle"></div>50 000 — 100 000 ₽</div>
+        <div class="option"><div class="option-circle"></div>100 000 ₽ и выше</div>
+        <div class="option"><div class="option-circle"></div>Хочу обсудить</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-text"><span class="question-number">9</span>Когда нужен готовый сайт?</div>
+      <div class="question-options">
+        <div class="option"><div class="option-circle"></div>Как можно скорее</div>
+        <div class="option"><div class="option-circle"></div>В течение 2–3 недель</div>
+        <div class="option"><div class="option-circle"></div>В течение месяца</div>
+        <div class="option"><div class="option-circle"></div>Не горит — важно качество</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="question-text"><span class="question-number">10</span>Как с вами удобнее всего связаться?</div>
+      <div class="question-hint">Telegram, WhatsApp, email — и в какое время вам удобно созвониться.</div>
+      <div class="question-answer">Ваш ответ...</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<div class="brief-footer">
+  <div class="footer-title">Спасибо, что заполнили!</div>
+  <p class="footer-text">Я изучу ваши ответы и напишу в течение нескольких часов, чтобы предложить удобное время для короткого созвона. На нём мы вместе разберём структуру, смыслы и визуальный язык — и вы будете точно понимать, что получите в итоге.</p>
+  <a class="footer-contact" href="https://t.me/evavasilyyevna">✈ Telegram: @evavasilyyevna</a>
+</div>
+
+</body>
+</html>
