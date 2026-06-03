@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Кейс — Клуб «Рассвет» · Ева, веб-дизайнер</title>
+<meta name="description" content="Как я за 7 дней собрала сайт-систему для женского клуба, которая заменила ручную работу администратора — онлайн-оплата, расписание из таблицы, счётчик мест."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFF1B5;--cream-light:#FFFADC;--cream-deep:#F0E29E;
+  --blue:#C1DBE8;--blue-soft:#D8EAF2;
+  --burg:#43302E;--burg-70:#5E4542;--burg-50:#7A6462;--burg-30:#A89997;
+  --white:#FFFCF2;--bg:#FAF6E8;
+  --r:24px;--rs:16px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.65;color:var(--burg);background:var(--bg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* grain overlay */
+body::after{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.028;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+
+.wrap{max-width:1060px;margin:0 auto;padding:0 32px}
+
+/* ═══════════ NAV ═══════════ */
+.nav{position:sticky;top:0;z-index:100;background:rgba(250,246,232,.92);backdrop-filter:blur(16px) saturate(160%);border-bottom:1px solid rgba(67,48,46,.05)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:62px}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:26px;letter-spacing:-.03em;color:var(--burg)}
+.nav-crumb{font-size:13px;color:var(--burg-30);display:flex;align-items:center;gap:8px}
+.nav-crumb span{color:var(--burg-50);font-weight:500}
+.nav-cta{background:var(--burg);color:var(--cream-light);padding:9px 22px;border-radius:999px;font-size:13px;font-weight:600;transition:transform .15s,box-shadow .2s;white-space:nowrap}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(67,48,46,.22)}
+
+/* ═══════════ COVER ═══════════ */
+.cover{background:var(--burg);color:var(--cream-light);padding:80px 0 72px;position:relative;overflow:hidden}
+.cover::before{content:"";position:absolute;top:-140px;right:-100px;width:560px;height:560px;background:radial-gradient(circle,rgba(193,219,232,.10) 0%,transparent 65%);border-radius:50%;pointer-events:none}
+.cover::after{content:"";position:absolute;bottom:-100px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(255,241,181,.08) 0%,transparent 65%);border-radius:50%;pointer-events:none}
+.cover-inner{position:relative;z-index:2}
+.cover-eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(255,241,181,.1);border:1px solid rgba(255,241,181,.15);padding:8px 18px;border-radius:999px;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--cream);margin-bottom:36px}
+.cover-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--cream);animation:pulse 2.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.5)}}
+.cover h1{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,80px);font-weight:700;line-height:1.0;letter-spacing:-.03em;max-width:820px;margin-bottom:28px}
+.cover h1 em{font-style:italic;font-weight:500;color:var(--cream-deep)}
+.cover-lead{font-size:18px;line-height:1.7;color:rgba(255,241,181,.65);max-width:600px;margin-bottom:52px}
+.cover-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,241,181,.08);border:1px solid rgba(255,241,181,.08);border-radius:20px;overflow:hidden;max-width:680px}
+.cstat{padding:24px 20px;background:rgba(255,241,181,.04);text-align:center}
+.cstat-n{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:700;color:var(--cream);line-height:1;margin-bottom:6px}
+.cstat-l{font-size:11.5px;color:rgba(255,241,181,.5);line-height:1.35;font-weight:500}
+.cover-live{display:inline-flex;align-items:center;gap:10px;margin-top:36px;padding:12px 24px;border:1px solid rgba(255,241,181,.2);border-radius:999px;font-size:13.5px;color:rgba(255,241,181,.7);transition:all .2s;font-weight:500}
+.cover-live:hover{background:rgba(255,241,181,.08);color:var(--cream);border-color:rgba(255,241,181,.35)}
+.cover-live .dot-green{width:8px;height:8px;border-radius:50%;background:#5BBB7B;flex-shrink:0;box-shadow:0 0 0 3px rgba(91,187,123,.2)}
+
+/* ═══════════ SECTION BASE ═══════════ */
+.sec{padding:88px 0}
+.sec+.sec{border-top:1px solid rgba(67,48,46,.06)}
+.sec-label{display:inline-block;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--burg-30);font-weight:700;margin-bottom:14px}
+.sec-label::before{content:"— "}
+.sec-title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(34px,4.5vw,52px);line-height:1.04;letter-spacing:-.025em;margin-bottom:20px}
+.sec-title em{font-style:italic;font-weight:500;color:var(--burg-50)}
+.sec-sub{font-size:17px;line-height:1.68;color:var(--burg-50);max-width:580px}
+
+/* ═══════════ SITUATION ═══════════ */
+.situation-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
+.sit-card{border-radius:20px;padding:36px 32px}
+.sit-card.was{background:var(--white);border:1px solid rgba(67,48,46,.06)}
+.sit-card.is{background:var(--burg);color:var(--cream-light)}
+.sit-card-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-bottom:20px}
+.was .sit-card-label{color:var(--burg-30)}
+.is .sit-card-label{color:rgba(255,241,181,.45)}
+.sit-card h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;line-height:1.15;margin-bottom:20px}
+.is h3{color:var(--cream)}
+.sit-list{list-style:none;display:flex;flex-direction:column;gap:13px}
+.sit-list li{font-size:15px;line-height:1.55;display:flex;gap:12px;align-items:flex-start}
+.was .sit-list li{color:var(--burg-70)}
+.is .sit-list li{color:rgba(255,241,181,.75)}
+.sit-list li .icon{flex-shrink:0;width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:1px}
+.was .sit-list li .icon{background:rgba(67,48,46,.06);color:var(--burg-30)}
+.is .sit-list li .icon{background:rgba(255,241,181,.12);color:var(--cream-deep)}
+
+/* big number callout */
+.callout{background:var(--cream);border-radius:20px;padding:40px 44px;display:flex;align-items:center;gap:36px;margin-top:16px;border:1px solid rgba(67,48,46,.06)}
+.callout-n{font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:700;line-height:1;color:var(--burg);flex-shrink:0}
+.callout-text h4{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin-bottom:8px}
+.callout-text p{font-size:15px;color:var(--burg-50);line-height:1.6;margin:0;max-width:480px}
+
+/* ═══════════ FEATURE SECTIONS ═══════════ */
+.feature{display:grid;grid-template-columns:1.25fr .75fr;gap:52px;align-items:center;padding:64px 0;border-top:1px solid rgba(67,48,46,.06)}
+.feature:first-of-type{border-top:none;padding-top:0}
+.feature.rev{grid-template-columns:.75fr 1.25fr}
+.feature.rev .feat-img{order:2}
+.feature.rev .feat-text{order:1}
+.feat-img{border-radius:20px;overflow:hidden;box-shadow:0 28px 72px rgba(67,48,46,.12),0 0 0 1px rgba(67,48,46,.04);transition:transform .35s}
+.feat-img:hover{transform:translateY(-5px)}
+.feat-img img{width:100%;display:block}
+.feat-num{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:700;color:var(--cream-deep);line-height:1;margin-bottom:8px}
+.feat-text h3{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;line-height:1.1;margin-bottom:14px}
+.feat-text p{font-size:16px;color:var(--burg-50);line-height:1.7;margin-bottom:22px}
+.feat-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.feat-tags span{background:var(--cream);padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;color:var(--burg-70)}
+.feat-insight{background:var(--blue-soft);border-radius:14px;padding:18px 20px;font-size:14px;color:var(--burg-70);line-height:1.6;border-left:3px solid var(--blue)}
+.feat-insight strong{color:var(--burg);font-weight:600}
+
+/* full-width image */
+.full-img-block{margin:0 0 0}
+.full-img-block img{width:100%;border-radius:20px;box-shadow:0 28px 72px rgba(67,48,46,.10),0 0 0 1px rgba(67,48,46,.04)}
+.full-img-caption{display:flex;justify-content:space-between;align-items:flex-start;margin-top:20px;gap:24px}
+.full-img-caption h4{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;margin:0;flex-shrink:0}
+.full-img-caption p{font-size:15px;color:var(--burg-50);line-height:1.6;margin:0;max-width:520px;text-align:right}
+
+/* ═══════════ TECH ═══════════ */
+.tech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:40px}
+.tech-item{background:var(--white);border:1px solid rgba(67,48,46,.05);border-radius:16px;padding:24px 20px;text-align:center;transition:transform .2s,box-shadow .2s}
+.tech-item:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(67,48,46,.07)}
+.tech-icon{font-size:28px;margin-bottom:12px}
+.tech-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;margin-bottom:4px}
+.tech-role{font-size:12.5px;color:var(--burg-50);line-height:1.4}
+
+/* ═══════════ RESULT ═══════════ */
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:48px}
+.res-card{border-radius:20px;padding:32px 28px;text-align:center}
+.res-card:nth-child(1){background:var(--burg);color:var(--cream-light)}
+.res-card:nth-child(2){background:var(--cream);border:1px solid rgba(67,48,46,.06)}
+.res-card:nth-child(3){background:var(--white);border:1px solid rgba(67,48,46,.05)}
+.res-n{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:700;line-height:1;margin-bottom:10px}
+.res-card:nth-child(1) .res-n{color:var(--cream)}
+.res-card:nth-child(2) .res-n{color:var(--burg)}
+.res-card:nth-child(3) .res-n{color:var(--burg)}
+.res-label{font-size:14px;line-height:1.45;font-weight:500}
+.res-card:nth-child(1) .res-label{color:rgba(255,241,181,.6)}
+.res-card:nth-child(2) .res-label,.res-card:nth-child(3) .res-label{color:var(--burg-50)}
+
+/* testimony */
+.testimony{background:var(--burg);border-radius:24px;padding:52px 56px;margin-top:20px;position:relative;overflow:hidden}
+.testimony::before{content:"\201C";font-family:'Cormorant Garamond',serif;font-size:200px;font-weight:700;line-height:1;color:rgba(255,241,181,.06);position:absolute;top:-20px;left:32px;pointer-events:none;leading-trim:both}
+.testimony blockquote{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;font-style:italic;line-height:1.45;color:var(--cream);max-width:680px;position:relative;z-index:2;margin-bottom:24px}
+.testimony cite{font-size:14px;color:rgba(255,241,181,.5);font-style:normal;position:relative;z-index:2}
+.testimony cite strong{color:rgba(255,241,181,.85);font-weight:600}
+
+/* ═══════════ ABOUT EVA ═══════════ */
+.about-eva{display:grid;grid-template-columns:.4fr .6fr;gap:48px;align-items:center;margin-top:52px}
+.about-eva-img{border-radius:20px;overflow:hidden;aspect-ratio:.8/1;box-shadow:0 24px 56px rgba(67,48,46,.12)}
+.about-eva-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+.about-eva-text .sec-label{display:block;margin-bottom:12px}
+.about-eva-text h3{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:700;line-height:1.1;margin-bottom:16px}
+.about-eva-text p{font-size:16px;color:var(--burg-50);line-height:1.7;margin-bottom:14px}
+.eva-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.eva-tags span{background:var(--cream);padding:8px 16px;border-radius:999px;font-size:12.5px;font-weight:600;color:var(--burg-70)}
+
+/* ═══════════ CTA ═══════════ */
+.cta-section{padding:20px 0 100px}
+.cta-box{background:var(--burg);border-radius:36px;padding:88px 64px;text-align:center;position:relative;overflow:hidden}
+.cta-box::before{content:"";position:absolute;top:-120px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(193,219,232,.10) 0%,transparent 65%);border-radius:50%}
+.cta-box::after{content:"";position:absolute;bottom:-100px;left:-80px;width:380px;height:380px;background:radial-gradient(circle,rgba(255,241,181,.08) 0%,transparent 65%);border-radius:50%}
+.cta-box h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,64px);font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--cream);margin-bottom:20px;position:relative;z-index:2}
+.cta-box h2 em{font-style:italic;font-weight:500;color:var(--cream-deep)}
+.cta-box p{font-size:17px;color:rgba(255,241,181,.65);max-width:500px;margin:0 auto 10px;line-height:1.65;position:relative;z-index:2}
+.cta-note{font-size:13px;color:rgba(255,241,181,.35)!important;font-style:italic;margin:0 auto 44px!important;max-width:340px}
+.cta-btn{display:inline-flex;align-items:center;gap:12px;background:var(--cream);color:var(--burg);padding:19px 48px;border-radius:999px;font-size:16px;font-weight:700;transition:transform .15s,box-shadow .2s;position:relative;z-index:2;box-shadow:0 12px 32px rgba(0,0,0,.12)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 20px 48px rgba(0,0,0,.18)}
+.cta-btn .arr{transition:transform .2s}
+.cta-btn:hover .arr{transform:translateX(5px)}
+.cta-links{margin-top:24px;font-size:13px;color:rgba(255,241,181,.3);position:relative;z-index:2}
+.cta-links a{color:rgba(255,241,181,.5);transition:color .2s}
+.cta-links a:hover{color:var(--cream)}
+
+/* ═══════════ FOOTER ═══════════ */
+.footer{background:var(--burg);color:rgba(255,241,181,.35);padding:40px 0 24px;border-top:1px solid rgba(255,241,181,.06)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:24px;color:var(--cream)}
+.footer-right{text-align:right;font-size:13px}
+.footer-right a{color:rgba(255,241,181,.45);transition:color .2s}
+.footer-right a:hover{color:var(--cream)}
+
+/* ═══════════ ANIMATIONS ═══════════ */
+.fi{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+.fi-d1{transition-delay:.1s}.fi-d2{transition-delay:.18s}.fi-d3{transition-delay:.26s}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media(max-width:860px){
+  .wrap{padding:0 20px}
+  .cover{padding:60px 0 56px}
+  .cover-stats{grid-template-columns:1fr 1fr}
+  .situation-grid,.about-eva{grid-template-columns:1fr}
+  .feature,.feature.rev{grid-template-columns:1fr}
+  .feature.rev .feat-img{order:0}.feature.rev .feat-text{order:0}
+  .full-img-caption{flex-direction:column}
+  .full-img-caption p{text-align:left}
+  .tech-grid{grid-template-columns:1fr 1fr}
+  .result-grid{grid-template-columns:1fr}
+  .testimony{padding:40px 32px}
+  .testimony blockquote{font-size:22px}
+  .cta-box{padding:64px 28px}
+  .footer-inner{flex-direction:column;gap:12px;text-align:center}
+  .footer-right{text-align:center}
+  .callout{flex-direction:column;gap:16px;text-align:center}
+  .nav-crumb{display:none}
+}
+@media(max-width:540px){
+  .cover-stats{grid-template-columns:1fr 1fr}
+  .tech-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="https://portffoolio-72v8.vercel.app" class="nav-logo">eva.</a>
+    <div class="nav-crumb">Портфолио <span style="opacity:.3">/ кейс /</span> <span>Клуб «Рассвет»</span></div>
+    <a href="https://t.me/evavasilyyevna" target="_blank" rel="noopener" class="nav-cta">Написать в Telegram →</a>
+  </div>
+</nav>
+
+<!-- ═══════ COVER ═══════ -->
+<section class="cover">
+  <div class="wrap cover-inner fi">
+    <div class="cover-eyebrow"><span class="dot"></span> Кейс · Веб-дизайн · 2025</div>
+    <h1>Клуб «Рассвет» — <em>автоматизировала бизнес&nbsp;за&nbsp;7&nbsp;дней</em></h1>
+    <p class="cover-lead">Женский клуб активностей в Москве. За неделю я собрала сайт-систему, которая заменила ручную работу администратора: теперь сайт сам принимает оплату, ведёт запись и обновляет расписание без участия владельца.</p>
+    <div class="cover-stats">
+      <div class="cstat"><div class="cstat-n">7</div><div class="cstat-l">дней на создание</div></div>
+      <div class="cstat"><div class="cstat-n">3</div><div class="cstat-l">страницы с полным функционалом</div></div>
+      <div class="cstat"><div class="cstat-n">0</div><div class="cstat-l">ручной работы после запуска</div></div>
+      <div class="cstat"><div class="cstat-n">24/7</div><div class="cstat-l">сайт продаёт за владельца</div></div>
+    </div>
+    <a href="https://rassvet-self.vercel.app" target="_blank" rel="noopener" class="cover-live">
+      <span class="dot-green"></span> rassvet-self.vercel.app — смотреть живой сайт
+    </a>
+  </div>
+</section>
+
+<!-- ═══════ SITUATION ═══════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="fi">
+      <div class="sec-label">Ситуация</div>
+      <h2 class="sec-title">С чем пришёл клуб — и&nbsp;что&nbsp;<em>изменилось</em></h2>
+      <p class="sec-sub">Клуб «Рассвет» — это живое сообщество с активной аудиторией, но весь операционный процесс держался на ручном труде одного человека.</p>
+    </div>
+
+    <div class="situation-grid fi">
+      <div class="sit-card was">
+        <div class="sit-card-label">Было</div>
+        <h3>Бизнес в Telegram-чате</h3>
+        <ul class="sit-list">
+          <li><span class="icon">✕</span>Запись на мероприятия — через личные сообщения вручную</li>
+          <li><span class="icon">✕</span>Расписание — в заметках, PDF и сторис, всегда устаревшее</li>
+          <li><span class="icon">✕</span>Оплата — переводом на карту, потом подтверждение вручную</li>
+          <li><span class="icon">✕</span>Клиенты каждый раз спрашивают «а что у вас в субботу?»</li>
+          <li><span class="icon">✕</span>Масштабирование невозможно — всё завязано на одного человека</li>
+          <li><span class="icon">✕</span>Нет структурированной самопрезентации клуба</li>
+        </ul>
+      </div>
+      <div class="sit-card is">
+        <div class="sit-card-label">Стало</div>
+        <h3>Автоматическая система</h3>
+        <ul class="sit-list">
+          <li><span class="icon">✓</span>Сайт сам принимает запись через форму</li>
+          <li><span class="icon">✓</span>Оплата через Prodamus — деньги на счёт без участия владельца</li>
+          <li><span class="icon">✓</span>Расписание обновляется из Google Таблицы — без программиста</li>
+          <li><span class="icon">✓</span>Интерактивный календарь с фильтрами и навигацией</li>
+          <li><span class="icon">✓</span>Счётчик мест в реальном времени стимулирует покупку</li>
+          <li><span class="icon">✓</span>Виральный контент приводит новых клиентов органически</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout fi">
+      <div class="callout-n">∞</div>
+      <div class="callout-text">
+        <h4>Сайт заменил администратора полностью</h4>
+        <p>До запуска каждый вопрос «сколько стоит» и «есть ли места на пятницу» требовал ответа вручную. После — клиент сам находит, выбирает, оплачивает и получает подтверждение. Ноль рутины на стороне владельца.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FEATURES ═══════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="fi">
+      <div class="sec-label">Разбор по экранам</div>
+      <h2 class="sec-title">Каждый экран <em>решает конкретную задачу</em></h2>
+      <p class="sec-sub">Никакой воды — только функциональные блоки, которые работают на продажи и автоматизацию.</p>
+    </div>
+
+    <!-- 01 HERO -->
+    <div class="feature fi">
+      <div class="feat-img">
+        <img src="https://portffoolio-72v8.vercel.app/case-hero.png" alt="Hero — первый экран сайта Рассвет" loading="lazy"/>
+      </div>
+      <div class="feat-text">
+        <div class="feat-num">01</div>
+        <h3>Первый экран: 3 секунды на решение</h3>
+        <p>Тёплые тона, живые фото, минимум текста — максимум ощущения. Два чётких CTA: «Выбрать тариф» и «Узнать больше». Sticky-хедер с кнопкой действия остаётся на экране при прокрутке — клиент может купить с любой точки страницы.</p>
+        <div class="feat-tags">
+          <span>Hero-секция</span><span>Sticky-хедер</span><span>Двойной CTA</span>
+        </div>
+        <div class="feat-insight"><strong>Почему это работает:</strong> пользователь принимает решение о доверии в первые 3 секунды. Правильный визуал и понятное действие резко увеличивают время на сайте и конверсию.</div>
+      </div>
+    </div>
+
+    <!-- 02 ABOUT -->
+    <div class="feature rev fi">
+      <div class="feat-img">
+        <img src="https://portffoolio-72v8.vercel.app/case-about.png" alt="О клубе" loading="lazy"/>
+      </div>
+      <div class="feat-text">
+        <div class="feat-num">02</div>
+        <h3>Раздел «О клубе»: доверие через смыслы</h3>
+        <p>Посетитель чувствует атмосферу клуба ещё до записи. Сторителлинг, фото из жизни, ценности — всё это формирует эмоциональную связь, которая конвертирует «интересно» в «хочу вступить».</p>
+        <div class="feat-tags">
+          <span>Фото-коллаж</span><span>Сторителлинг</span><span>Ценности клуба</span>
+        </div>
+        <div class="feat-insight"><strong>Деталь:</strong> анимации при скролле появляются последовательно — сначала текст, потом фото. Это создаёт ощущение «живого» рассказа, а не статичной страницы.</div>
+      </div>
+    </div>
+
+    <!-- 03 SCHEDULE FULL -->
+    <div class="full-img-block fi">
+      <img src="https://portffoolio-72v8.vercel.app/case-schedule.png" alt="Расписание на неделю" loading="lazy"/>
+      <div class="full-img-caption">
+        <h4>03 — Расписание на неделю</h4>
+        <p>7 дней, цветовые метки по типам активностей, время и название. Больше никаких PDF в чате и вопросов «а что у вас в субботу?». Всё обновляется из Google Таблицы — без программиста.</p>
+      </div>
+    </div>
+
+    <!-- 04 CALENDAR -->
+    <div class="feature fi">
+      <div class="feat-img">
+        <img src="https://portffoolio-72v8.vercel.app/case-calendar-header.png" alt="Календарь — шапка" loading="lazy"/>
+      </div>
+      <div class="feat-text">
+        <div class="feat-num">04</div>
+        <h3>Календарь на месяц: клиент сам управляет</h3>
+        <p>Отдельная страница с полным расписанием. Фильтрация по типам активностей, навигация по месяцам, бейдж «сегодня». Цветовое кодирование — взгляд сразу находит нужное.</p>
+        <p>Самое важное: данные подтягиваются из Google Таблицы. Обновили строчку — сайт обновился. Без обращений к дизайнеру, без технической сложности для владельца.</p>
+        <div class="feat-tags">
+          <span>Отдельная страница</span><span>Фильтры</span><span>Google Sheets</span><span>Автообновление</span>
+        </div>
+        <div class="feat-insight"><strong>Это — ключевая автоматизация:</strong> раньше обновление расписания = ручная работа + новый PDF + публикация в сторис. Теперь = одна строчка в таблице.</div>
+      </div>
+    </div>
+
+    <!-- 05 CALENDAR FULL -->
+    <div class="full-img-block fi">
+      <img src="https://portffoolio-72v8.vercel.app/case-calendar-full.png" alt="Сетка календаря на месяц" loading="lazy"/>
+      <div class="full-img-caption">
+        <h4>05 — Сетка месяца</h4>
+        <p>Работает как мобильное приложение — интерактивная навигация, цветовые метки, мгновенный отклик. Клиент планирует свой месяц прямо на сайте.</p>
+      </div>
+    </div>
+
+    <!-- 06 GALLERY -->
+    <div class="feature rev fi">
+      <div class="feat-img">
+        <img src="https://portffoolio-72v8.vercel.app/case-gallery.png" alt="Галерея и виральный контент" loading="lazy"/>
+      </div>
+      <div class="feat-text">
+        <div class="feat-num">06</div>
+        <h3>Галерея + виральный контент</h3>
+        <p>Фото-сетка из жизни клуба показывает реальную атмосферу, которую невозможно передать текстом. Плюс CTA-баннер с переходом на отдельную страницу.</p>
+        <p>Отдельная страница — чеклист «45+ вещей, которые веселее делать вместе». Это виральный лид-магнит: люди сохраняют и&nbsp;репостят в&nbsp;сторис → органический трафик без бюджета на рекламу.</p>
+        <div class="feat-tags">
+          <span>Фото-сетка</span><span>CTA-баннер</span><span>Лид-магнит</span><span>Вирусный контент</span>
+        </div>
+        <div class="feat-insight"><strong>Маркетинговая механика:</strong> пользователь делится чеклистом → его подписчики видят упоминание клуба → новые люди приходят органически. Без затрат.</div>
+      </div>
+    </div>
+
+    <!-- 07 PRICING -->
+    <div class="feature fi">
+      <div class="feat-img">
+        <img src="https://portffoolio-72v8.vercel.app/case-pricing.png" alt="Тарифы и оплата" loading="lazy"/>
+      </div>
+      <div class="feat-text">
+        <div class="feat-num">07</div>
+        <h3>Тарифы и оплата: деньги без участия владельца</h3>
+        <p>Два тарифа, понятное сравнение, форма заявки с автоматическим расчётом суммы. Оплата через Prodamus — клиент платит картой прямо на сайте, деньги уходят на счёт владельца автоматически.</p>
+        <p>Самое ценное: <strong>счётчик свободных мест в реальном времени</strong> подтягивается из Google Таблицы. Видя «осталось 2 места», клиент принимает решение быстрее.</p>
+        <div class="feat-tags">
+          <span>Тарифы</span><span>Модальная форма</span><span>Prodamus</span><span>Счётчик мест</span><span>Реальное время</span>
+        </div>
+        <div class="feat-insight"><strong>Эффект срочности:</strong> «Осталось 2 места на субботу» — это не манипуляция, а реальные данные из таблицы. Конверсия в моментальную оплату выше, чем без счётчика.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TECH ═══════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="fi">
+      <div class="sec-label">Технологии</div>
+      <h2 class="sec-title">Что под капотом — <em>просто и надёжно</em></h2>
+      <p class="sec-sub">Никаких сложных CMS, которые сломаются через месяц. Только проверенный стек, который владелец может контролировать сам.</p>
+    </div>
+    <div class="tech-grid fi">
+      <div class="tech-item">
+        <div class="tech-icon">✦</div>
+        <div class="tech-name">Figma</div>
+        <div class="tech-role">Дизайн-концепция, мудборд, прототип — всё согласовывается до вёрстки</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">⌨</div>
+        <div class="tech-name">HTML / CSS / JS</div>
+        <div class="tech-role">Кастомная вёрстка — не шаблон. Именно то, что задумано, без компромиссов</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">▲</div>
+        <div class="tech-name">Vercel</div>
+        <div class="tech-role">Хостинг с бесплатным тарифом для большинства проектов, деплой в один клик</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">📊</div>
+        <div class="tech-name">Google Sheets</div>
+        <div class="tech-role">База данных для расписания и мест. Владелец меняет таблицу — сайт обновляется сам</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">💳</div>
+        <div class="tech-name">Prodamus</div>
+        <div class="tech-role">Платёжный шлюз. Клиент платит картой, деньги на счёт владельца автоматически</div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">📱</div>
+        <div class="tech-name">Адаптив</div>
+        <div class="tech-role">Отлично выглядит и работает на телефоне — где большинство клиентов</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ RESULT ═══════ -->
+<section class="sec">
+  <div class="wrap">
+    <div class="fi">
+      <div class="sec-label">Результат</div>
+      <h2 class="sec-title">Что получил клуб <em>в итоге</em></h2>
+    </div>
+
+    <div class="result-grid fi">
+      <div class="res-card">
+        <div class="res-n">7</div>
+        <div class="res-label">дней от брифа до живого сайта</div>
+      </div>
+      <div class="res-card">
+        <div class="res-n">0₽</div>
+        <div class="res-label">стоимость хостинга в месяц на Vercel</div>
+      </div>
+      <div class="res-card">
+        <div class="res-n">∞</div>
+        <div class="res-label">сайт работает и продаёт сам — без ограничений</div>
+      </div>
+    </div>
+
+    <div class="testimony fi">
+      <blockquote>«Я не ожидала, что это будет так быстро. За неделю — готовый сайт, который сам принимает оплату и ведёт запись. Теперь я трачу это время на развитие клуба, а не на переписку в директе.»</blockquote>
+      <cite><strong>Клуб «Рассвет»</strong> — женский клуб активностей в Москве</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ABOUT EVA ═══════ -->
+<section class="sec">
+  <div class="wrap fi">
+    <div class="sec-label">Кто это сделал</div>
+    <div class="about-eva">
+      <div class="about-eva-img">
+        <img src="https://portffoolio-72v8.vercel.app/eva-hero.jpeg" alt="Ева — веб-дизайнер" loading="lazy"/>
+      </div>
+      <div class="about-eva-text">
+        <h3>Привет, я Ева</h3>
+        <p>Веб-дизайнер из Москвы. Я не просто «рисую красивые страницы» — я проектирую бизнес-системы: с оплатой, автоматизациями, аналитикой и SEO-подготовкой, которые реально работают на продажи.</p>
+        <p>Для меня важен результат: сайт должен заменять рутину, экономить ваше время и приносить клиентов — 24/7, без вашего участия в операционке.</p>
+        <p>Работаю по договору, предоплата 70%, фиксированные сроки. Без сюрпризов.</p>
+        <div class="eva-tags">
+          <span>Кастомная вёрстка</span><span>Интеграции</span><span>SEO-подготовка</span><span>Аналитика</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA ═══════ -->
+<section class="cta-section">
+  <div class="wrap">
+    <div class="cta-box fi">
+      <h2>Хотите такую же систему<br>для <em>вашего бизнеса?</em></h2>
+      <p>Напишите — обсудим ваш проект за 15 минут. Расскажу, что подойдёт именно для вашей ниши и сколько это стоит.</p>
+      <p class="cta-note">Бесплатно и без обязательств. Отвечаю в течение нескольких часов.</p>
+      <a href="https://t.me/evavasilyyevna" target="_blank" rel="noopener" class="cta-btn">
+        ✈ Написать в Telegram <span class="arr">→</span>
+      </a>
+      <div class="cta-links">
+        <a href="https://portffoolio-72v8.vercel.app" target="_blank" rel="noopener">Портфолио</a>
+        &nbsp;·&nbsp;
+        <a href="https://rassvet-self.vercel.app" target="_blank" rel="noopener">Живой сайт клуба «Рассвет»</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <a href="https://portffoolio-72v8.vercel.app" class="footer-logo">eva.</a>
+    <div class="footer-right">
+      <a href="https://t.me/evavasilyyevna" target="_blank" rel="noopener">@evavasilyyevna</a>
+      &nbsp;·&nbsp;
+      <a href="https://portffoolio-72v8.vercel.app" target="_blank" rel="noopener">portffoolio-72v8.vercel.app</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('vis');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
